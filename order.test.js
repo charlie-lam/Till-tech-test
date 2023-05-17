@@ -20,6 +20,13 @@ describe("Till Order", () => {
   describe('unit addItem method', () => {
     it('should be able to take an order, track the item/quantity and keep a running total', () => {
       order.addItem('Cafe Latte')
+      expect(order.items).toEqual({'Cafe Latte': 1})
+      expect(order.total).toEqual(4.75)
+    })
+    it('should throw an error if for some reason an item not at the shop is added', () => {
+      expect(() => {
+        order.addItem('Smoked salmon')
+      }).toThrow('Item not in list')
     })
   })
 });
