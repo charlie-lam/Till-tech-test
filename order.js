@@ -12,9 +12,7 @@ class Order {
   }
 
   addItem(item) {
-    console.log(data.prices[0])
     const found = data.prices[0][item]
-    console.log(found)
     if(found){
       this.items[item] ? this.items[item] += 1 : this.items[item] = 1
       this.total += found

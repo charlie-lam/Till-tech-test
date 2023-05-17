@@ -18,7 +18,7 @@ describe("Till Order", () => {
     })
   })
   describe('unit addItem method', () => {
-    it('should be able to take an order, track the item/quantity and keep a running total', () => {
+    it('should be able to take an order, track the item and add the value to the total', () => {
       order.addItem('Cafe Latte')
       expect(order.items).toEqual({'Cafe Latte': 1})
       expect(order.total).toEqual(4.75)
@@ -27,6 +27,12 @@ describe("Till Order", () => {
       expect(() => {
         order.addItem('Smoked salmon')
       }).toThrow('Item not in list')
+    })
+    it('should be able to track two added items and the running total', () => {
+      order.addItem('Cafe Latte')
+      order.addItem('Cafe Latte')
+      expect(order.items).toEqual({'Cafe Latte': 2})
+      expect(order.total).toEqual(9.5)
     })
   })
 });
