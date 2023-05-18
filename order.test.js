@@ -40,10 +40,19 @@ describe("Till Order", () => {
       order.total = 9.5
       order.items = {'Cafe Latte': 2}
       order.names = 'Jane'
-      const expectedOutput = "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\n\nTable: 1/[4]\nJane\n  Cafe Latte     2 x 4.75\n\nTax     $0.82\nTotal      $9.50"
-      const result = jest.spyOn(console, 'log')
-      order.printReceipt
-      expect(result).toHaveBeenCalledWith(expectedOutput)
+      const expectedOutput = "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\n\nTable: 1/[4]\nJane\nCafe Latte     2 x 4.75\n\nTax     $0.82\nTotal     $9.50"
+      expect(order.printReceipt()).toEqual(expectedOutput)
+    })
+  })
+  describe('integration test', () => {
+    it('should be able to take a name, multiple items and return the right receipt', () => {
+      order.addNames('Jane')
+      order.addItem('Cafe Latte')
+      order.addItem('Blueberry Muffin')
+      order.addItem('Choc Mudcake')
+      order.addItem('Cafe Latte')
+      const expectedOutput = "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\n\nTable: 1/[4]\nJane\nCafe Latte     2 x 4.75\nBlueberry Muffin     1 x 4.05\nChoc Mudcake     1 x 6.40\n\nTax     $1.72\nTotal     $19.95"
+      expect(order.printReceipt()).toEqual(expectedOutput)
     })
   })
 });

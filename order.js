@@ -21,6 +21,27 @@ class Order {
       throw new Error('Item not in list')
     }
   }
+
+  printReceipt(){
+    let itemList = ''
+    Object.keys(this.items).map(key => {
+      const stringToAdd = `${key}     ${this.items[key]} x ${data.prices[0][key].toFixed(2)}\n`
+      console.log(stringToAdd)
+      itemList += stringToAdd
+    })
+    const result = 
+    `${data.shopName}
+
+${data.address}
+Phone: ${data.phone}
+
+Table: 1/[4]
+${this.names}
+${itemList}
+Tax     $${(this.total*0.0864).toFixed(2)}
+Total     $${this.total.toFixed(2)}`
+    return result
+  }
 }
 
 module.exports = Order;
