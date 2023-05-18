@@ -6,7 +6,7 @@ String Item/s
 
 Output: 
 String Receipt
-(Date Time,
+(*Date Time,
  Shop name,
  Location,
  Phone,

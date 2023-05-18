@@ -18,7 +18,7 @@ describe("Till Order", () => {
     })
   })
   describe('unit addItem method', () => {
-    it('should be able to take an order, track the item and add the value to the total', () => {
+    it('should be able to take an order, add the item to state and add the value to the total', () => {
       order.addItem('Cafe Latte')
       expect(order.items).toEqual({'Cafe Latte': 1})
       expect(order.total).toEqual(4.75)
@@ -33,6 +33,17 @@ describe("Till Order", () => {
       order.addItem('Cafe Latte')
       expect(order.items).toEqual({'Cafe Latte': 2})
       expect(order.total).toEqual(9.5)
+    })
+  })
+  describe('unit printReceipt method', () => {
+    it('should log out the expected result', () => {
+      order.total = 9.5
+      order.items = {'Cafe Latte': 2}
+      order.names = 'Jane'
+      const expectedOutput = "The Coffee Connection\n\n123 Lakeside Way\nPhone: 16503600708\n\nTable: 1/[4]\nJane\n  Cafe Latte     2 x 4.75\n\nTax     $0.82\nTotal      $9.50"
+      const result = jest.spyOn(console, 'log')
+      order.printReceipt
+      expect(result).toHaveBeenCalledWith(expectedOutput)
     })
   })
 });
